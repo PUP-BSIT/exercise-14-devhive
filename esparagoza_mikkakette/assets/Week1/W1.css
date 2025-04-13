@@ -1,0 +1,117 @@
+body {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+    text-align: center;
+    background-color: #434343;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 60%;
+    height: auto;
+    margin: 20px auto;
+    background: hsl(322, 100%, 92%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#main_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(./assets/background-image.png);
+    height: 50px;
+    padding: auto;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+img {
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
+    margin-bottom: auto;
+}
+
+h1 {
+    padding: auto;
+    background-color: #aa00ff;
+}
+h2 {
+    color: #202020;
+    border-bottom: 2px solid #e4b2fd;
+    background-color: #e4b2fd;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+.about_me {
+    padding: auto;
+    color: #202020;
+    border-bottom: 2px solid #e4b2fd;
+    background-color: #e4b2fd;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 25px ;
+}
+
+ul, ol {
+list-style: none;
+}
+
+li {
+    padding: 5px;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: underline;
+    color: #aa00ff;
+}
+
+#gallery img {
+    width: 150px;
+    height: auto;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form h2 {
+    margin-bottom: 30px;
+    padding: auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+    border-radius: 10px;
+    width: 50%;
+    height: 23px;
+    margin: 10px 0;
+    padding: 5px;
+    border: solid 1.5px #e4b2fd;
+    border-color: #e2a4ff;
+    font-size: 14px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.contact-form textarea {
+    min-height: 100px;
+    resize: vertical;
+    margin-bottom: 15px;
+}
+
+.contact-form button {
+    width: 50%;
+    padding: 5px;
+    background-color: #ff4081;
+    border: solid 1.5px #e4b2fd;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
