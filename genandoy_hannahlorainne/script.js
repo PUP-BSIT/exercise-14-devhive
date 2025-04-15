@@ -22,13 +22,11 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        // Reset UI
         countryResult.classList.remove("hidden");
         countryName.textContent = "Searching...";
         countryDetails.innerHTML = `<div class="loader">Loading country data...</div>`;
         regionCountries.classList.add("hidden");
 
-        // First API request to get country details
         fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(query)}`)
             .then(response => {
                 if (!response.ok) {
@@ -37,20 +35,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 return response.json();
             })
             .then(countries => {
-                // Take the first match (most relevant)
                 const country = countries[0];
                 
-                // Update country details
                 countryName.textContent = country.name.common;
                 displayCountryDetails(country);
                 
-                // Get region and make second API request
                 const region = country.region;
                 return fetch(`https://restcountries.com/v3.1/region/${encodeURIComponent(region)}`);
             })
             .then(response => response.json())
             .then(regionData => {
-                // Display region countries
                 regionCountries.classList.remove("hidden");
                 displayRegionCountries(regionData);
             })
@@ -103,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayRegionCountries(countries) {
-        // Sort countries alphabetically by name
         countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
         
         const currentCountry = countryName.textContent;
@@ -112,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function() {
             <h3>Region: ${countries[0].region}</h3>
             <div class="region-countries-grid">
                 ${countries.map(country => {
-                    // Skip the currently displayed country
                     if (country.name.common === currentCountry) return '';
                     
                     return `
@@ -125,7 +117,6 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
         
-        // Add click events to region country cards
         const countryCards = document.querySelectorAll('.region-country-card');
         countryCards.forEach(card => {
             card.addEventListener('click', () => {
@@ -133,7 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 searchInput.value = countryName;
                 searchCountry();
                 
-                // Scroll back to top
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
