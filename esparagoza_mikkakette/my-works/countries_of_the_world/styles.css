@@ -9,45 +9,36 @@ body {
     line-height: 1.6;
 }
 
-.fixed-header {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-background: linear-gradient(to left, #434343, #c40000);
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-text-align: left;
-z-index: 1000;
-height: 85px;
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to left, #434343, #c40000);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    z-index: 1000;
+    height: 125px;
 }
 
-.fixed-header h1 {
+header h1 {
     margin-left: 25px;
     font-size: 30px;
     color: #ffffff;
     font-weight: bold;
 }
 
-.container {
-    width: 70%;
-    margin: 30px auto;
-    background: #810a0a;
-    padding: 10px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
+header p {
+    margin-left: 25px;
+    margin-top: -10px;
 }
 
-#about,
-#interests_and_hobbies_page,
-#work_page,
-#goals_page,
-#testimonial_page,
-#gallery,
-#info_page,
-#contact_page,
-#comment_page {
+main {
+    width: 80%;
+    margin: 80px auto;
+}
+
+.card {
     width: 70%;
     margin: 20px auto;
     background: #434343d7;
@@ -58,7 +49,11 @@ height: 85px;
     overflow: hidden;
 }
 
-h2, h3 {
+.search-card {
+    background: #810a0a;
+}
+
+h2 {
     color: #ffffff;
     background: linear-gradient(to right, #930000, #a30000);
     border-radius: 15px;
@@ -68,63 +63,14 @@ h2, h3 {
     letter-spacing: 1px;
 }
 
-ul, ol {
-    padding: 0;
-    list-style-position: inside;
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
 
-li {
-    padding: 8px;
-    font-size: 15px;
-    margin: 10px 0;
-    background: rgba(140, 130, 130, 0.825);
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(227, 222, 222, 0.05);
-    transition: all 0.3s ease;
-    list-style: none;
-}
-
-li:hover {
-    background: rgb(0, 0, 0);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transform: translateY(-3px);
-    color: rgb(255, 255, 255);
-}
-
-img {
-    border-radius: 50%;
-    height: 250px;
-    width: 250px;
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.395);
-    margin: 10px auto;
-    border: 5px solid #7a0000;
-    transition: all 0.3s ease;
-    object-fit: cover;
-}
-
-#gallery img {
-    width: 130px;
-    height: 130px;
-    margin: 5px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgb(0, 0, 0);
-    transition: all 0.3s ease;
-}
-
-#gallery img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-#contact_page input,
-#contact_page textarea,
-#contact_page button,
-#contact input,
-#contact textarea,
-#contact button,
-.add-comment-page textarea,
-.add-comment-page input {
+#country-search {
     width: 70%;
     padding: 12px;
     margin: 15px auto;
@@ -137,26 +83,15 @@ img {
     text-align: center;
     transition: all 0.3s ease;
     background-color: #b4b0b0;
-    
 }
 
-#contact_page input:hover,
-#contact_page textarea:hover,
-#contact_page button:hover,
-#contact input:hover,
-#contact textarea:hover,
-#contact button:hover,
-.add-comment-page textarea:hover,
-.add-comment-page button:hover,
-.add-comment-page input:hover {
+#country-search:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
     background-color: rgb(255, 255, 255);
 }
 
-#contact_page button,
-#contact button,
-.add-comment-page button {
+#search-btn {
     width: 50%;
     padding: 12px;
     background: linear-gradient(to right, #7b0e0e, #ff0000);
@@ -172,26 +107,107 @@ img {
     margin-bottom: 15px;
 }
 
-.comments-container {
-    width: 100%;
-    margin-top: 20px;
+#search-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
 }
 
-.comments-container p {
-    text-align: left;
+.hidden {
+    display: none;
+}
+
+#country-details, #region-details {
     background: rgba(140, 130, 130, 0.825);
     border-radius: 8px;
     padding: 12px;
     margin: 10px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    text-align: center;
 }
 
-.comments-container p:hover {
+#country-details:hover, #region-details:hover {
     background: rgb(0, 0, 0);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transform: translateY(-3px);
     color: rgb(255, 255, 255);
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Region Countries Grid - Updated to 4 columns */
+.region-countries-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.region-country-card {
+    background: rgba(140, 130, 130, 0.825);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.region-country-card:hover {
+    background: rgb(0, 0, 0);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+    color: rgb(255, 255, 255);
+}
+
+.region-country-flag {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 3px solid #7a0000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.region-country-name {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#region-details h3 {
+    background: linear-gradient(to right, #7b0e0e, #a30000);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+table th {
+    background: linear-gradient(to right, #7b0e0e, #a30000);
+    color: white;
+}
+
+table tr:hover {
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .sort-controls {
@@ -226,83 +242,98 @@ img {
     color: white;
 }
 
-#commenter-comment {
-    resize: vertical;
-    min-height: 80px;
-    text-align: left;
+/* Country Info Display */
+.country-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.comments-container.empty::before {
-    content: "No comments yet. Be the first to comment!";
-    display: block;
-    text-align: center;
-    color: #aaa;
-    font-style: italic;
-    padding: 20px;
+.country-flag {
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.395);
+    margin: 10px auto;
+    border: 5px solid #7a0000;
+    transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
-    .container,
-    #about,
-    #interests_and_hobbies_page,
-    #work_page,
-    #goals_page,
-    #testimonial_page,
-    #gallery,
-    #contact,
-    #comment_page {
+.country-data {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.data-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.data-label {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Error Message */
+.error-message {
+    background: rgba(200, 0, 0, 0.3);
+    color: #ffffff;
+    padding: 15px;
+    border-left: 4px solid #ff0000;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .region-countries-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .region-countries-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .card {
         width: 85%;
         padding: 20px;
     }
 
-    #contact-page input,
-    #contact-page textarea,
-    #contact-page button,
-    #contact input,
-    #contact textarea,
-    #contact button {
+    #country-search {
         width: 80%;
     }
-
-    #gallery img {
-        width: 130px;
-        height: 130px;
-        margin: 10px;
+    
+    #search-btn {
+        width: 60%;
     }
 }
 
-@media (max-width: 480px) {
-    .container,
-    #about,
-    #interests_and_hobbies_page,
-    #work_page,
-    #goals_page,
-    #testimonial_page,
-    #gallery,
-    #contact,
-    #comment_page
-    .add-comment-page {
+@media (max-width: 600px) {
+    .region-countries-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .card {
         width: 90%;
         padding: 15px;
     }
 
-    .comment-page input,
-    .comment-page textarea,
-    .comment-page button,
-    #contact input,
-    #contact textarea,
-    #contact button {
+    #country-search {
         width: 90%;
     }
-
-    #gallery img {
-        width: 100px;
-        height: 100px;
-        margin: 5px;
+    
+    #search-btn {
+        width: 70%;
     }
 
-    img {
-        height: 120px;
-        width: 120px;
+    header h1 {
+        font-size: 24px;
+    }
+    
+    header p {
+        font-size: 14px;
     }
 }
