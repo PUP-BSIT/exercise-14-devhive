@@ -1,6 +1,5 @@
 <div align="center">
-
-<img width=400px height=450px src="./assets/devhiveLogo.png"/>
+<img width=500px height=350px src="./assets/devhiveLogo.png"/>
 
 #  DevHive
 
