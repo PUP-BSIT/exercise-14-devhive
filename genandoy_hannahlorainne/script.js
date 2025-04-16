@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         countryResult.classList.remove("hidden");
         countryName.textContent = "Searching...";
-        countryDetails.innerHTML = `<div class="loader">Loading country data...</div>`;
+        countryDetails.innerHTML = `<div class="loader">Loading country.</div>`;
         regionCountries.classList.add("hidden");
 
         fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(query)}`)
@@ -55,17 +55,23 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayCountryDetails(country) {
-        const capital = country.capital && country.capital.length > 0 ? country.capital[0] : "N/A";
-        const population = country.population ? country.population.toLocaleString() : "N/A";
-        const languages = country.languages ? Object.values(country.languages).join(", ") : "N/A";
+        const capital = country.capital && country.capital.length > 0 ? 
+            country.capital[0] : "N/A";
+        const population = country.population ? 
+            country.population.toLocaleString() : "N/A";
+        const languages = country.languages ? 
+            Object.values(country.languages).join(", ") : "N/A";
         const currencies = country.currencies ? 
-            Object.values(country.currencies).map(c => `${c.name} (${c.symbol || ""})`).join(", ") : 
+            Object.values(country.currencies).map(c => 
+                `${c.name} (${c.symbol || ""})`).join(", ") : 
             "N/A";
-        const area = country.area ? `${country.area.toLocaleString()} km²` : "N/A";
+        const area = country.area ? 
+            `${country.area.toLocaleString()} km²` : "N/A";
         
         countryDetails.innerHTML = `
             <div class="country-info">
-                <img class="country-flag" src="${country.flags.png}" alt="${country.name.common} flag">
+                <img class="country-flag" src="${country.flags.png}" 
+                    alt="${country.name.common} flag">
                 <div class="country-data">
                     <div class="data-item">
                         <span class="data-label">Capital</span>
@@ -73,7 +79,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                     <div class="data-item">
                         <span class="data-label">Region</span>
-                        <span class="data-value">${country.region} (${country.subregion || ""})</span>
+                        <span class="data-value">${country.region} 
+                            (${country.subregion || ""})</span>
                     </div>
                     <div class="data-item">
                         <span class="data-label">Population</span>
@@ -108,9 +115,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (country.name.common === currentCountry) return '';
                     
                     return `
-                        <div class="region-country-card" data-country="${country.name.common}">
-                            <img class="region-country-flag" src="${country.flags.png}" alt="${country.name.common} flag">
-                            <div class="region-country-name">${country.name.common}</div>
+                        <div class="region-country-card" data-country="
+                            ${country.name.common}">
+                            <img class="region-country-flag" 
+                                src="${country.flags.png}" 
+                                alt="${country.name.common} flag">
+                            <div class="region-country-name">
+                                ${country.name.common}</div>
                         </div>
                     `;
                 }).join('')}

@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        countryDetails.style.display = 'none';
-        regionCountries.style.display = 'none';
-        errorMessage.style.display = 'none';
-        loading.style.display = 'block';
+        countryDetails.classList.remove('visible');
+        regionCountries.classList.remove('visible');
+        errorMessage.classList.remove('visible');
+        loading.classList.add('visible');
         
         fetch(`https://restcountries.com/v3.1/name/${country}`)
             .then(response => {
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 if (data.length === 0) {
-                    throw new Error('No result, country do not exists!.');
+                    throw new Error('No result, country does not exist!');
                 }
             
                 displayCountryDetails(data[0]);
@@ -46,18 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(regionData => {
                 displayRegionCountries(regionData);
-                loading.style.display = 'none';
+                loading.classList.remove('visible');
             })
             .catch(error => {
-                loading.style.display = 'none';
+                loading.classList.remove('visible');
                 showError(error.message);
             });
     }
     
     function displayCountryDetails(country) {
         document.getElementById('countryFlag').src = country.flags.svg;
-        document.getElementById('countryName').textContent = 
-            country.name.common;
+        document.getElementById('countryName').textContent = country.name.common;
         
         document.getElementById('capital').textContent = 
             country.capital ? country.capital.join(', ') : 'N/A';
@@ -88,13 +87,13 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('timezones').textContent = country.timezones ? 
             country.timezones.join(', ') : 'N/A';
         
-        countryDetails.style.display = 'block';
+        countryDetails.classList.add('visible');
     }
     
     function displayRegionCountries(countries) {
         if (countries.length > 0) { 
             document.getElementById('regionName').textContent = 
-            countries[0].region;
+                countries[0].region;
         }
         
         const grid = document.getElementById('countriesGrid');
@@ -104,11 +103,15 @@ document.addEventListener('DOMContentLoaded', function() {
         countries.forEach(country => {
             const card = document.createElement('div');
             card.className = 'country-card';
-            card.innerHTML = `
-                <img src="${country.flags.svg}" 
-                alt="${country.name.common} flag">
-                <h3>${country.name.common}</h3>
-            `;
+            
+            const img = document.createElement('img');
+            img.src = country.flags.svg;
+            img.alt = `${country.name.common} flag`;
+            card.appendChild(img);
+            
+            const countryName = document.createElement('h3');
+            countryName.textContent = country.name.common;
+            card.appendChild(countryName);
             
             card.addEventListener('click', function() {
                 searchInput.value = country.name.common;
@@ -119,12 +122,12 @@ document.addEventListener('DOMContentLoaded', function() {
             grid.appendChild(card);
         });
         
-        regionCountries.style.display = 'block';
+        regionCountries.classList.add('visible');
     }
     
     function showError(message) {
         errorMessage.textContent = message;
-        errorMessage.style.display = 'block';
+        errorMessage.classList.add('visible');
     }
     
     function formatNumber(num) {
