@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <h3>Region: ${countries[0].region}</h3>
             <div class="region-countries-grid">
                 ${countries.map(country => {
+
                     if (country.name.common === currentCountry) return '';
                     
                     return `
