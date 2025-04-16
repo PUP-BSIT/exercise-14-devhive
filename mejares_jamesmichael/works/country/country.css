@@ -200,3 +200,11 @@ button:hover {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 }
+
+.loading, .error-message, .country-details, .region-countries {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
