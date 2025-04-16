@@ -123,7 +123,7 @@ h2 {
     margin: 10px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    text-align: left;
+    text-align: center;
 }
 
 #country-details:hover, #region-details:hover {
@@ -142,43 +142,53 @@ h2 {
     font-weight: bold;
 }
 
-/* Country info styling */
-#region-details ul {
-    padding: 0;
-    list-style-position: inside;
+/* Region Countries Grid - Updated to 4 columns */
+.region-countries-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 20px 0;
 }
 
-#region-details li {
-    padding: 8px;
-    font-size: 15px;
-    margin: 10px 0;
+.region-country-card {
     background: rgba(140, 130, 130, 0.825);
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(227, 222, 222, 0.05);
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    list-style: none;
+    cursor: pointer;
 }
 
-#region-details li:hover {
+.region-country-card:hover {
     background: rgb(0, 0, 0);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transform: translateY(-3px);
-    color: rgb(255, 255, 255); 
+    color: rgb(255, 255, 255);
 }
 
-/* Country flag styling */
-.flag-img {
-    border-radius: 10px; /* Not 50% to keep flag rectangular */
-    height: auto;
-    width: 200px;
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.395);
-    margin: 10px auto;
-    border: 5px solid #7a0000;
-    transition: all 0.3s ease;
-    display: block;
+.region-country-flag {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 3px solid #7a0000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Country details table styling */
+.region-country-name {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#region-details h3 {
+    background: linear-gradient(to right, #7b0e0e, #a30000);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 0;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -200,7 +210,6 @@ table tr:hover {
     background: rgba(0, 0, 0, 0.5);
 }
 
-/* Sort controls for potential future use */
 .sort-controls {
     display: flex;
     justify-content: center;
@@ -233,23 +242,58 @@ table tr:hover {
     color: white;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    .card {
-        width: 85%;
-        padding: 20px;
-    }
+.country-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    #country-search {
-        width: 80%;
-    }
-    
-    #search-btn {
-        width: 60%;
+.country-flag {
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.395);
+    margin: 10px auto;
+    border: 5px solid #7a0000;
+    transition: all 0.3s ease;
+}
+
+.country-data {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.data-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.data-label {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.error-message {
+    background: rgba(200, 0, 0, 0.3);
+    color: #ffffff;
+    padding: 15px;
+    border-left: 4px solid #ff0000;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+@media (max-width: 1200px) {
+    .region-countries-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+    .region-countries-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .card {
         width: 90%;
         padding: 15px;
