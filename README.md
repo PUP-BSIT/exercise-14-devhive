@@ -1,6 +1,8 @@
 <div align="center">
 
-# 🐝 DevHive
+<img width=400px height=450px src="./assets/devhiveLogo.png"/>
+
+#  DevHive
 
 ### 🚀 A Collaborative Hub for Web Development
 
