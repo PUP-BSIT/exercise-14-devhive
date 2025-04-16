@@ -24,24 +24,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     const fixedTimestamp = new Date(2025, 2, 19, 17, 0).getTime();
 
-    const commentItems = commentPage.querySelectorAll("li");
+    const commentItems = commentPage.querySelectorAll(":scope > li");
     commentItems.forEach((li) => {
-        if (li.parentElement === commentPage) {
-            const p = document.createElement("p");
-            p.textContent = `${li.textContent} (${fixedDate})`;
-            p.dataset.timestamp = fixedTimestamp;
-            commentsContainer.appendChild(p);
-            li.remove();
-        }
+        const p = document.createElement("p");
+        p.textContent = `${li.textContent} (${fixedDate})`;
+        p.dataset.timestamp = fixedTimestamp;
+        commentsContainer.appendChild(p);
+        li.remove();
     });
 
     function toggleButton() {
-        commentBtn.disabled = !(nameInput.value.trim() 
-            && commentInput.value.trim());
+        commentBtn.disabled = !(nameInput.value.trim() && commentInput.value.trim());
         commentBtn.style.opacity = commentBtn.disabled ? "0.5" : "1";
-        commentBtn.style.cursor = commentBtn.disabled ? 
-            "not-allowed" : "pointer";
+        commentBtn.style.cursor = commentBtn.disabled ? "not-allowed" : "pointer";
     }
+    
     nameInput.addEventListener("input", toggleButton);
     commentInput.addEventListener("input", toggleButton);
 
@@ -58,14 +55,19 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         const newComment = document.createElement("p");
-        newComment.textContent = `${nameInput.value}: 
-            ${commentInput.value} (${formattedDate})`;
+        newComment.textContent = `${nameInput.value}: ${commentInput.value} (${formattedDate})`;
         newComment.dataset.timestamp = now.getTime();
-        commentsContainer.prepend(newComment);
+        
+        const sortNewest = document.getElementById("sort-newest").classList.contains("active");
+        if (sortNewest) {
+            commentsContainer.prepend(newComment);
+        } else {
+            commentsContainer.appendChild(newComment);
+        }
 
         nameInput.value = "";
         commentInput.value = "";
-        commentBtn.disabled = true;
+        toggleButton(); 
         commentsContainer.classList.remove("empty");
     });
 
@@ -85,11 +87,10 @@ document.addEventListener("DOMContentLoaded", function () {
         commentsContainer.classList.add("empty");
     }
 
-    sortComments("desc");
+    sortComments("desc"); 
 
     function sortComments(direction) {
-        const container = document.querySelector(".comments-container");
-        const comments = Array.from(container.children);
+        const comments = Array.from(commentsContainer.children);
 
         comments.sort((a, b) => {
             const timeA = parseInt(a.dataset.timestamp);
@@ -97,8 +98,12 @@ document.addEventListener("DOMContentLoaded", function () {
             return direction === "asc" ? timeA - timeB : timeB - timeA;
         });
 
-        container.innerHTML = "";
-        comments.forEach((comment) => container.appendChild(comment));
+        while (commentsContainer.firstChild) {
+            commentsContainer.removeChild(commentsContainer.firstChild);
+        }
+        
+        comments.forEach((comment) => commentsContainer.appendChild(comment));
     }
+    
     toggleButton();
 });
