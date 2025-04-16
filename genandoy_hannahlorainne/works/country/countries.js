@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const query = searchInput.value.trim();
         
         if (!query) {
-            showError(countryDetails, "Please enter a country name");
+            showError(countryDetails, "Enter a country name");
             return;
         }
 
@@ -101,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function displayRegionCountries(countries) {
-        // Sort countries alphabetically by name
         countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
         
         const currentCountry = countryName.textContent;
@@ -125,16 +124,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 }).join('')}
             </div>
         `;
-        
-        // Add click events to region country cards
+
         const countryCards = document.querySelectorAll('.region-country-card');
         countryCards.forEach(card => {
             card.addEventListener('click', () => {
                 const countryName = card.dataset.country;
                 searchInput.value = countryName;
                 searchCountry();
-                
-                // Scroll back to top
+            
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
